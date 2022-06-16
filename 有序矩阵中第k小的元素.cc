@@ -32,3 +32,33 @@ public:
         return (*s.rbegin()).first;
     }
 };
+
+// 2
+
+class Solution {
+public:
+
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        auto cmp = [](int m, int n)
+        {
+            return m > n;
+        };
+       
+        priority_queue<int,vector<int>, decltype(cmp)> pq(cmp);
+        for (auto& i : matrix)
+        {
+            for (auto j : i)
+            {
+                pq.push(j);
+            }
+        }
+        int temp = 0;
+        while (--k)
+        {
+            pq.pop();
+        }
+
+        temp = pq.top();
+        return temp;
+    }
+};
